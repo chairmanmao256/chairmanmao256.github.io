@@ -20,23 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Aerolab Archive">
-<meta property="og:url" content="http://example.com/tags/main/index.html">
+  <meta name="description" content="CFD++基本操作本节教程为视频教程，由冯良韬录制。片中用到的网格可以用PointWise生成，也可以用ICEM生成。 Episode 1Episode 2使用CFD++计算翼型周围流场：介绍方程组的选择；初始条件和边界条件设置；输出设置；时间推进设置等。导出翼型的升阻力数据：介绍如何在CFD++中定义要输出的升力系数、阻力系数和力矩系数；如何在计算结束后读取这些系数。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="使用CFD++">
+<meta property="og:url" content="http://example.com/Docs/Software/CFDpp.html">
 <meta property="og:site_name" content="Aerolab Archive">
+<meta property="og:description" content="CFD++基本操作本节教程为视频教程，由冯良韬录制。片中用到的网格可以用PointWise生成，也可以用ICEM生成。 Episode 1Episode 2使用CFD++计算翼型周围流场：介绍方程组的选择；初始条件和边界条件设置；输出设置；时间推进设置等。导出翼型的升阻力数据：介绍如何在CFD++中定义要输出的升力系数、阻力系数和力矩系数；如何在计算结束后读取这些系数。">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-22T14:44:58.065Z">
+<meta property="article:modified_time" content="2022-02-22T14:44:58.065Z">
 <meta property="article:author" content="Aerolabers">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/tags/main/">
+<link rel="canonical" href="http://example.com/Docs/Software/CFDpp">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":"","permalink":"","path":"tags/main/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":true,"permalink":"http://example.com/Docs/Software/CFDpp.html","path":"Docs/Software/CFDpp.html","title":"使用CFD++"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Tag: main | Aerolab Archive</title>
+<title>使用CFD++ | Aerolab Archive
+</title>
   
 
 
@@ -108,7 +113,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -121,6 +126,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#CFD-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="nav-number">1.</span> <span class="nav-text">CFD++基本操作</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -167,50 +173,96 @@
 </noscript>
 
 
-    <div class="main-inner tag posts-collapse">
-
-
+    <div class="main-inner page posts-expand">
   
-  
-  
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">main
-          <small>Tag</small>
-        </h1>
-      </div>
 
       
-    <div class="collection-year">
-      <span class="collection-header">2022</span>
-    </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2022-02-21T21:30:23+08:00"
-              content="2022-02-21">
-          02-21
-        </time>
-      </div>
+        
+        <ul class="sub-menu menu">
+          
+            
+          
+          
+            
+                
+  <li class="menu-item menu-item-algorithm"><a href="/Docs/Algorithm/" rel="section"><i class="fa fa-flag fa-fw"></i>Algorithm</a></li>
 
-      <div class="post-title">
-          <a class="post-title-link" href="/2022/02/21/About/" itemprop="url">
-            <span itemprop="name">Aerolab资料库</span>
-          </a>
-      </div>
+
+          
+            
+                
+  <li class="menu-item menu-item-software"><a href="/Docs/Software/" rel="section"><i class="fa fa-flag fa-fw"></i>Software</a></li>
+
+
+        </ul>
+        
+
+        
+
+                
+                
+
+                
+
+                    
+                    <ul class="sub-menu menu">
+                      
+                        
+  <li class="menu-item menu-item-icem"><a href="/Docs/Software/ICEM.html" rel="section"><i class="fa fa-upload fa-fw"></i>ICEM</a></li>
+
+
+                        
+  <li class="menu-item menu-item-cfd++"><a href="/Docs/Software/CFDpp.html" rel="section"><i class="fa fa-download fa-fw"></i>CFD++</a></li>
+
+
+                    </ul>
+                    
+                
+        
+      
+  
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">使用CFD++
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/Docs/">DOCS</a></li>
+            <li><a href="/Docs/Software/">SOFTWARE</a></li>
+            <li>CFDPP</li>
+          
+  </ul>
+</div>
+
+</header>
 
       
-    </header>
-  </article>
-
+      
+      <div class="post-body">
+          <h2 id="CFD-基本操作"><a href="#CFD-基本操作" class="headerlink" title="CFD++基本操作"></a>CFD++基本操作</h2><p>本节教程为视频教程，由冯良韬录制。片中用到的网格可以用PointWise生成，也可以用ICEM生成。</p>
+<div class="tabs" id="fengtutorial"><ul class="nav-tabs"><li class="tab active"><a href="#fengtutorial-1">Episode 1</a></li><li class="tab"><a href="#fengtutorial-2">Episode 2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="fengtutorial-1"><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1dt4y1e7ep?spm_id_from=333.999.0.0">使用CFD++计算翼型周围流场</a>：介绍方程组的选择；初始条件和边界条件设置；输出设置；时间推进设置等。</p></div><div class="tab-pane" id="fengtutorial-2"><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV11v411r713?spm_id_from=333.999.0.0">导出翼型的升阻力数据</a>：介绍如何在CFD++中定义要输出的升力系数、阻力系数和力矩系数；如何在计算结束后读取这些系数。</p></div></div></div>
+      </div>
+      
+      
+      
     </div>
-  </div>
-  
-  
-  
+  <ul class="breadcrumb">
+            <li><a href="/Docs/">DOCS</a></li>
+            <li><a href="/Docs/Software/">SOFTWARE</a></li>
+            <li>CFDPP</li>
+          
+  </ul>
+
+    
+    
+
 
 </div>
   </main>
