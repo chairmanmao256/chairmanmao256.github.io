@@ -18,14 +18,14 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-  <meta name="description" content="概述ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用C++编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了Cython文件和setup.py文件，因而ALDESIA可以被容易地被python打包，变成一个可以被import到python代码中的库。 下载与安装(Windows+WS">
+  <meta name="description" content="概述 ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用C++编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了Cython文件和setup.py文件，因而ALDESIA可以被容易地被python打包，变成一个可以被import到python代码中的库。 下载与安装(Windows">
 <meta property="og:type" content="website">
 <meta property="og:title" content="安装与使用ALDESIA">
 <meta property="og:url" content="http://example.com/Docs/Software/ALDESIA.html">
 <meta property="og:site_name" content="Aerolab Archive">
-<meta property="og:description" content="概述ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用C++编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了Cython文件和setup.py文件，因而ALDESIA可以被容易地被python打包，变成一个可以被import到python代码中的库。 下载与安装(Windows+WS">
+<meta property="og:description" content="概述 ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用C++编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了Cython文件和setup.py文件，因而ALDESIA可以被容易地被python打包，变成一个可以被import到python代码中的库。 下载与安装(Windows">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-02-23T08:37:40.153Z">
 <meta property="article:modified_time" content="2022-02-23T08:37:40.153Z">
@@ -79,6 +79,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -92,15 +93,41 @@
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">1</span></a></li>
         
             
-  <li class="menu-item menu-item-docs"><a href="/Docs/" rel="section"><i class="fa fa-book fa-fw"></i>docs</a></li>
+  <li class="menu-item menu-item-docs"><a href="/Docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li>
 
 
       
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -126,7 +153,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85-Windows-WSL"><span class="nav-number">2.</span> <span class="nav-text">下载与安装(Windows+WSL)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%81%9A%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">你可以做的开发</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85windowswsl"><span class="nav-number">2.</span> <span class="nav-text">下载与安装(Windows+WSL)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%A0%E5%8F%AF%E4%BB%A5%E5%81%9A%E7%9A%84%E5%BC%80%E5%8F%91"><span class="nav-number">4.</span> <span class="nav-text">你可以做的开发</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -186,13 +213,13 @@
           
             
                 
-  <li class="menu-item menu-item-algorithm"><a href="/Docs/Algorithm/" rel="section"><i class="fa fa-flag fa-fw"></i>Algorithm</a></li>
+  <li class="menu-item menu-item-algorithm"><a href="/Docs/Algorithm/" rel="section"><i class="fa fa-square-root-alt fa-fw"></i>Algorithm</a></li>
 
 
           
             
                 
-  <li class="menu-item menu-item-software"><a href="/Docs/Software/" rel="section"><i class="fa fa-flag fa-fw"></i>Software</a></li>
+  <li class="menu-item menu-item-software"><a href="/Docs/Software/" rel="section"><i class="fa fa-cube fa-fw"></i>Software</a></li>
 
 
         </ul>
@@ -209,15 +236,15 @@
                     <ul class="sub-menu menu">
                       
                         
-  <li class="menu-item menu-item-icem"><a href="/Docs/Software/ICEM.html" rel="section"><i class="fa fa-upload fa-fw"></i>ICEM</a></li>
+  <li class="menu-item menu-item-icem"><a href="/Docs/Software/ICEM.html" rel="section"><i class="fa fa-plane fa-fw"></i>ICEM</a></li>
 
 
                         
-  <li class="menu-item menu-item-cfd++"><a href="/Docs/Software/CFDpp.html" rel="section"><i class="fa fa-download fa-fw"></i>CFD++</a></li>
+  <li class="menu-item menu-item-cfd++"><a href="/Docs/Software/CFDpp.html" rel="section"><i class="fa fa-fighter-jet fa-fw"></i>CFD++</a></li>
 
 
                         
-  <li class="menu-item menu-item-aldesia"><a href="/Docs/Software/ALDESIA.html" rel="section"><i class="fa fa-download fa-fw"></i>ALDESIA</a></li>
+  <li class="menu-item menu-item-aldesia"><a href="/Docs/Software/ALDESIA.html" rel="section"><i class="fa fa-palette fa-fw"></i>ALDESIA</a></li>
 
 
                     </ul>
@@ -250,48 +277,39 @@
       
       
       <div class="post-body">
-          <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用<code>C++</code>编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了<code>Cython</code>文件和<code>setup.py</code>文件，因而ALDESIA可以被容易地被<code>python</code>打包，变成一个可以被<code>import</code>到<code>python</code>代码中的库。</p>
-<h2 id="下载与安装-Windows-WSL"><a href="#下载与安装-Windows-WSL" class="headerlink" title="下载与安装(Windows+WSL)"></a>下载与安装(Windows+WSL)</h2><div class="note warning"><ul>
+          <h2 id="概述">概述</h2>
+<p>ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用<code>C++</code>编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了<code>Cython</code>文件和<code>setup.py</code>文件，因而ALDESIA可以被容易地被<code>python</code>打包，变成一个可以被<code>import</code>到<code>python</code>代码中的库。</p>
+<h2 id="下载与安装windowswsl">下载与安装(Windows+WSL)</h2>
+<div class="note warning"><ul>
 <li><p>在下载和安装之前，确保你在WSL上的Ubuntu里安装了<code>g++</code>编译工具。输入下面的命令检查<code>g++</code>工具是否正确安装：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g++ --version</span><br></pre></td></tr></table></figure>
-
 <p>如果没有返回版本信息，那么你需要安装<code>g++</code>:</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essential</span><br></pre></td></tr></table></figure>
-
-<p>再次输入<code>g++ --version</code>查看是否返回版本信息，说返回，则说明安装成功。</p>
-</li>
-<li><p>安装之前，你还需要配置好<code>python</code>环境。关于<code>python</code>环境的配置，可以参考<a target="_blank" rel="noopener" href="https://ostechnix.com/how-to-install-miniconda-in-linux/">How To Install Miniconda In Linux - OSTechNix</a>，也可以直接参考官方网站：<a target="_blank" rel="noopener" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html">Installing on Linux — conda 4.11.0.post48+b31c5ab10 documentation</a>。</p>
-</li>
+<p>再次输入<code>g++ --version</code>查看是否返回版本信息，说返回，则说明安装成功。</p></li>
+<li><p>安装之前，你还需要配置好<code>python</code>环境。关于<code>python</code>环境的配置，可以参考<a target="_blank" rel="noopener" href="https://ostechnix.com/how-to-install-miniconda-in-linux/">How To Install Miniconda In Linux - OSTechNix</a>，也可以直接参考官方网站：<a target="_blank" rel="noopener" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/linux.html">Installing on Linux — conda 4.11.0.post48+b31c5ab10 documentation</a>。</p></li>
 <li><p>你还需要安装<code>uzip</code>。首先检查是否安装了<code>unzip</code>：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -v</span><br></pre></td></tr></table></figure>
-
 <p>如果没有成功输出版本信息，就运行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install unzip</span><br></pre></td></tr></table></figure>
-
 <p>然后运行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">unzip -v</span><br></pre></td></tr></table></figure>
-
-<p>如果输出版本信息，则表示<code>unzip</code>安装成功。</p>
-</li>
+<p>如果输出版本信息，则表示<code>unzip</code>安装成功。</p></li>
 </ul>
 </div>
-
 <div class="tabs" id="installation"><ul class="nav-tabs"><li class="tab active"><a href="#installation-1">Step 1</a></li><li class="tab"><a href="#installation-2">Step 2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="installation-1"><p>打开WSL上的Ubuntu终端，跳转到你希望保存ALDESIA代码的目录（作为演示，我将把ALDESIA代码保存到<code>~/coding</code>目录下）。然后输入下面的指令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/chairmanmao256/ALDESIA/archive/r1.zip &amp;&amp; \</span><br><span class="line">unzip r1.zip &amp;&amp; \</span><br><span class="line">cd ALDESIA-r1</span><br></pre></td></tr></table></figure>
-
 <p>现在，你下载并解压了ALDESIA的所有代码，并已经跳转到了这些代码所在的目录。</p></div><div class="tab-pane" id="installation-2"><p>在ALDESIA代码所在的目录中，运行下面的命令以编译所有文件，生成供链接用的<code>.o</code>文件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Allmake.sh</span><br></pre></td></tr></table></figure>
-
 <p>然后跳转到<code>Aldesia</code>目录，将ALDESIA打包为<code>python</code>扩展：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Aldesia &amp;&amp; \</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></div></div></div>
-
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>运行ALDESIA需要你准备两个文件：</p>
+<h2 id="使用方法">使用方法</h2>
+<p>运行ALDESIA需要你准备两个文件：</p>
 <div class="tabs" id="run"><ul class="nav-tabs"><li class="tab active"><a href="#run-1">input.ini</a></li><li class="tab"><a href="#run-2">run.py</a></li></ul><div class="tab-content"><div class="tab-pane active" id="run-1"><p>这个文件用来初始化ALDESIA对象，告诉ALDESIA想要它求解的问题的定义。</p></div><div class="tab-pane" id="run-2"><p>是你和ALDESIA的“交互界面”，用于生成ALDESIA对象，调用ALDESIA的方法以解决问题。</p></div></div></div>
-
 <p>这两个文件的示例可以在示例目录<code>/ALDESIA-r1/Examples</code>下找到。示例目录下有两个示例，分别演示了ALDESIA求解线性对流扩散问题、线性对流扩散的伴随的功能。</p>
-<h2 id="你可以做的开发"><a href="#你可以做的开发" class="headerlink" title="你可以做的开发"></a>你可以做的开发</h2><p>目前，ALDESIA还不算完善：它只能求解正问题及其伴随，得到偏微分方程的解、目标函数的梯度；而且，ALDESIA使用十分原始的SOR方法求解线性方程组。因此，你还可以做：</p>
+<h2 id="你可以做的开发">你可以做的开发</h2>
+<p>目前，ALDESIA还不算完善：它只能求解正问题及其伴随，得到偏微分方程的解、目标函数的梯度；而且，ALDESIA使用十分原始的SOR方法求解线性方程组。因此，你还可以做：</p>
 <ul>
-<li>完成ALDESIA和优化求解器工具包<a target="_blank" rel="noopener" href="https://github.com/mdolab/pyoptsparse">mdolab&#x2F;pyoptsparse</a>的接口，使得我们可以利用ALDESIA提供的目标函数值、梯度来求解优化问题。</li>
+<li>完成ALDESIA和优化求解器工具包<a target="_blank" rel="noopener" href="https://github.com/mdolab/pyoptsparse">mdolab/pyoptsparse</a>的接口，使得我们可以利用ALDESIA提供的目标函数值、梯度来求解优化问题。</li>
 <li>使用GMRES方法求解ALDESIA中的线性方程组。</li>
 </ul>
 
@@ -337,6 +355,8 @@
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 
@@ -345,6 +365,12 @@
   
 
 
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
