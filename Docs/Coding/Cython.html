@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.10.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+  <meta name="description" content="Cython简介 Cython是什么？ “Cython”一词与两件东西密切相关： （1）Cython 是一种将C，C++静态数据类型(static type)与Python语言混合的编程语言。这意味着Cython编程可以使用Python语法，又可以使用C，C++中的静态数据类型。 （2） cython是将Cython编写的源代码编译为高效的C，C++代码的编译器。 首先介绍(1) Cyth">
+<meta property="og:type" content="website">
+<meta property="og:title" content="使用Cython封装C++编写的Python扩展">
+<meta property="og:url" content="http://example.com/Docs/Coding/Cython.html">
+<meta property="og:site_name" content="Aerolab Archive">
+<meta property="og:description" content="Cython简介 Cython是什么？ “Cython”一词与两件东西密切相关： （1）Cython 是一种将C，C++静态数据类型(static type)与Python语言混合的编程语言。这意味着Cython编程可以使用Python语法，又可以使用C，C++中的静态数据类型。 （2） cython是将Cython编写的源代码编译为高效的C，C++代码的编译器。 首先介绍(1) Cyth">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-02-24T03:01:01.090Z">
+<meta property="article:modified_time" content="2022-02-24T03:01:01.090Z">
+<meta property="article:author" content="Aerolabers">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/Docs/Coding/Cython">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"en","comments":true,"permalink":"http://example.com/Docs/Coding/Cython.html","path":"Docs/Coding/Cython.html","title":"使用Cython封装C++编写的Python扩展"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用Cython封装C++编写的Python扩展 | Aerolab Archive
+</title>
+  
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Aerolab Archive</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Know what your comrades know.</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">1</span></a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">1</span></a></li>
+        
+            
+  <li class="menu-item menu-item-docs"><a href="/Docs/" rel="section"><i class="fa fa-book fa-fw"></i>Docs</a></li>
+
+
+      
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#cython%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Cython简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#cython%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">Cython是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#cython%E5%8F%AF%E4%BB%A5%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">Cython可以用来做什么？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8cython%E6%89%93%E5%8C%85c%E7%B1%BB---%E4%BB%A5%E4%B8%80%E7%BB%B4euler%E6%96%B9%E7%A8%8B%E6%B1%82%E8%A7%A3%E7%A8%8B%E5%BA%8F%E4%B8%BA%E4%BE%8B"><span class="nav-number">2.</span> <span class="nav-text">使用Cython打包C++类---以一维Euler方程求解程序为例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#c%E7%B1%BBeuler1d"><span class="nav-number">2.1.</span> <span class="nav-text">C++类：Euler1D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E5%AE%9A%E4%B9%89%E6%96%87%E4%BB%B6.pxd"><span class="nav-number">2.2.</span> <span class="nav-text">编写定义文件.pxd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6.pyx"><span class="nav-number">2.3.</span> <span class="nav-text">编写实现文件.pyx</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8setuptools%E5%92%8Ccython%E7%BC%96%E8%AF%91%E5%B9%B6%E5%AE%89%E8%A3%85%E6%89%A9%E5%B1%95"><span class="nav-number">2.4.</span> <span class="nav-text">使用setuptools和Cython编译并安装扩展</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Aerolabers</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner page posts-expand">
+  
+
+      
+
+        
+        <ul class="sub-menu menu">
+          
+            
+          
+          
+            
+                
+  <li class="menu-item menu-item-algorithm"><a href="/Docs/Algorithm/" rel="section"><i class="fa fa-square-root-alt fa-fw"></i>Algorithm</a></li>
+
+
+          
+            
+                
+  <li class="menu-item menu-item-software"><a href="/Docs/Software/" rel="section"><i class="fa fa-cube fa-fw"></i>Software</a></li>
+
+
+          
+            
+                
+  <li class="menu-item menu-item-coding"><a href="/Docs/Coding/" rel="section"><i class="fa fa-code fa-fw"></i>Coding</a></li>
+
+
+        </ul>
+        
+
+        
+
+                
+                
+
+                
+                
+
+                
+
+                    
+                    <ul class="sub-menu menu">
+                      
+                        
+  <li class="menu-item menu-item-a-missing-class"><a href="/Docs/Coding/A%20Missing%20Semester/" rel="section"><i class="fa fa-puzzle-piece fa-fw"></i>A Missing Class</a></li>
+
+
+                        
+  <li class="menu-item menu-item-cython"><a href="/Docs/Coding/Cython/" rel="section"><i class="fa fa-briefcase fa-fw"></i>Cython</a></li>
+
+
+                    </ul>
+                    
+                
+        
+      
+  
+
+
+    
+    
+    
+    <div class="post-block" lang="en"><header class="post-header">
+
+<h1 class="post-title" itemprop="name headline">使用Cython封装C++编写的Python扩展
+</h1>
+
+<div class="post-meta-container">
+  <ul class="breadcrumb">
+            <li><a href="/Docs/">DOCS</a></li>
+            <li><a href="/Docs/Coding/">CODING</a></li>
+            <li>CYTHON</li>
+          
+  </ul>
+</div>
+
+</header>
+
+      
+      
+      <div class="post-body">
+          <h2 id="cython简介">Cython简介</h2>
+<h3 id="cython是什么">Cython是什么？</h3>
+<p>“Cython”一词与两件东西密切相关：</p>
+<p>（1）<em>Cython</em> 是一种将C，C++静态数据类型(static type)与Python语言混合的编程语言。这意味着<em>Cython</em>编程可以使用Python语法，又可以使用C，C++中的静态数据类型。 （2） <code>cython</code>是将Cython编写的源代码编译为高效的C，C++代码的编译器。</p>
+<p>首先介绍(1) Cython语言。下面是一段使用纯Python语言编写的，计算斐波那契数列第<span class="math inline">\(n\)</span>个元素的代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">fib</span>(<span class="params">n</span>):</span><br><span class="line">	a, b = <span class="number">0.0</span>, <span class="number">1.0</span></span><br><span class="line">	<span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">		a, b = a + b, a</span><br><span class="line">	<span class="keyword">return</span> a</span><br></pre></td></tr></table></figure>
+<p>事实上，任何纯Python代码都是合格的Cython代码，上述代码也不例外。但是，正如(1)所说，Cython语言的特点还包括<strong>可以使用C，C++中的静态数据类型</strong>。下面我们来看一段更加”Cython“的代码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">def fib(int n):</span><br><span class="line">	cdef int i                  #C static type</span><br><span class="line">	cdef double a=0.0, b=1.0	#C static type</span><br><span class="line">	for i in range(n):</span><br><span class="line">		a, b = a + b, a</span><br><span class="line">	return a</span><br></pre></td></tr></table></figure>
+<p>上述Cython代码与纯Python代码的区别在于将所有的变量通过<code>cdef</code>语句声明成了C，C++静态数据类型。</p>
+<p>下面我们来看看(2)<code>cython</code>编译器。将上述求斐波那契数列第<span class="math inline">\(n\)</span>个元素的代码保存为<code>fib.pyx</code>，然后编写如下脚本，并将其保存为<code>setup.py</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">from</span> Cython.Build <span class="keyword">import</span> cythonize</span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;Fib app&#x27;</span>,</span><br><span class="line">    ext_modules=cythonize(<span class="string">&quot;fib.pyx&quot;</span>),</span><br><span class="line">    zip_safe=<span class="literal">False</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>再在终端输入<code>python setup.py build_ext --inplace</code>（注意，要保证当前激活的虚拟环境内安装有Cython）。该命令会将函数<code>fib</code>就地安装。安装完成后可在同一目录下找到<code>cython</code>编译产生的<code>fib.c</code>文件。</p>
+<p>然后我们可以在当地打开python交互界面，输入以下指令：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> fib</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>fib.fib(<span class="number">6</span>)</span><br><span class="line"><span class="number">8.0</span></span><br></pre></td></tr></table></figure>
+<p>可见，<code>fib.pyx</code>被成功安装。</p>
+<h3 id="cython可以用来做什么">Cython可以用来做什么？</h3>
+<p>对于上述求斐波那契数列的函数，我们比较纯Python脚本和编译后的、使用了静态数据类型的Cython程序的计算速度可以发现，<strong>后者的计算速度比前者快了50倍</strong>。因此Cython的一大应用是：</p>
+<ul>
+<li><strong>使用静态数据类型，并将Python脚本编译为C代码，提高对应的纯Python代码的计算速度。</strong></li>
+</ul>
+<p>在这个应用中，我们把Python变成了C，从而提高了计算效率。事实上，Cython还有”相反“的应用：</p>
+<ul>
+<li><strong>使用Cython将C函数或C++类封装成Python的扩展，供Python代码调用。</strong></li>
+</ul>
+<p>这样，我们可以利用更易读、易更改的Python代码使用复杂的C，C++代码（为C，C++代码做了一个Python外壳），并且仍然保有C，C++计算的高效性。下面，我们以Cython打包一维Euler方程的C++代码为例，简要介绍Cython打包方法。</p>
+<p><em>更多关于Cython的资料</em>：</p>
+<p><em>Cython: A Guide for Python Programmers, Kurt W.Smith</em></p>
+<p><a target="_blank" rel="noopener" href="https://cython.readthedocs.io/en/latest/index.html">Welcome to Cython’s Documentation — Cython 3.0.0a9 documentation</a></p>
+<h2 id="使用cython打包c类---以一维euler方程求解程序为例">使用Cython打包C++类---以一维Euler方程求解程序为例</h2>
+<p>该示例中的所有代码可以在<a target="_blank" rel="noopener" href="https://github.com/chairmanmao256/pyEuler1D">这里</a>下载。这套代码在Windows的带有Cython的Conda环境下即可编译。</p>
+<h3 id="c类euler1d">C++类：Euler1D</h3>
+<p>我使用C++实现了求解一维Euler方程的算法，并将它封装成了一个类<code>Euler1D</code>。我们通过<code>Euler1D.h</code>头文件来看看这个类都包含什么属性和方法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">ifndef</span> EULER1D_H_</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EULER1D_H_</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Euler1D</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">     std::string boundary_type;</span><br><span class="line">     <span class="type">int</span> ncells; <span class="comment">// The number of cellls. The virtual cells are not included.</span></span><br><span class="line">     <span class="type">double</span>** sol = <span class="keyword">new</span> <span class="type">double</span>* [<span class="number">3</span>];      <span class="comment">// cell-center solution vector.         </span></span><br><span class="line">     <span class="type">double</span>** sol_old = <span class="keyword">new</span> <span class="type">double</span>* [<span class="number">3</span>];  <span class="comment">// cell-center value at the last step   </span></span><br><span class="line">     <span class="type">double</span>** rec_l = <span class="keyword">new</span> <span class="type">double</span>* [<span class="number">3</span>];    <span class="comment">// reconstructed left value at interfaces.   </span></span><br><span class="line">     <span class="type">double</span>** rec_r = <span class="keyword">new</span> <span class="type">double</span>* [<span class="number">3</span>];    <span class="comment">// reconstructed right value at interfaces. </span></span><br><span class="line">     <span class="type">double</span>** flux = <span class="keyword">new</span> <span class="type">double</span>* [<span class="number">3</span>];     <span class="comment">// fluxes at interfaces.                 </span></span><br><span class="line">     <span class="type">double</span>** avg = <span class="keyword">new</span> <span class="type">double</span>* [<span class="number">3</span>];      <span class="comment">// Averaged primitive variables</span></span><br><span class="line">     <span class="type">double</span>* mesh;   <span class="comment">// The x mesh of the solution.</span></span><br><span class="line">     <span class="type">double</span> vL[<span class="number">3</span>][<span class="number">1</span>], vLL[<span class="number">3</span>][<span class="number">1</span>], vR[<span class="number">3</span>][<span class="number">1</span>], vRR[<span class="number">3</span>][<span class="number">1</span>]; <span class="comment">// Virtual cells</span></span><br><span class="line">     <span class="function"><span class="type">double</span>* <span class="title">get_eig</span><span class="params">(<span class="type">double</span> u, <span class="type">double</span> a)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">          <span class="comment">//Return the eigen values of the Jacobian</span></span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">prim2con</span><span class="params">(<span class="type">int</span> flag)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">          <span class="comment">//Convert primitive variables to conserved variables</span></span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">con2prim</span><span class="params">(<span class="type">int</span> flag)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">          <span class="comment">//Convert conserved variables to primitive variables</span></span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="type">double</span> <span class="title">minmod</span><span class="params">(<span class="type">double</span> a, <span class="type">double</span> b)</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">          <span class="comment">//minmod function for reconstruction</span></span><br><span class="line">     &#125; </span><br><span class="line">     <span class="function"><span class="type">void</span> <span class="title">setold</span><span class="params">()</span></span></span><br><span class="line"><span class="function">     </span>&#123;</span><br><span class="line">         ...</span><br><span class="line">          <span class="comment">//store the solution at the last time step</span></span><br><span class="line">     &#125;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">Euler1D</span>(std::string &amp; bctype, <span class="type">int</span> n = <span class="number">100</span>); <span class="comment">//Constructor.</span></span><br><span class="line">    ~<span class="built_in">Euler1D</span>();                   <span class="comment">//Destructor</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">initialize</span><span class="params">()</span></span>;            <span class="comment">//Set initial condition</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_boundary</span><span class="params">()</span></span>;          <span class="comment">//Set boundary condition</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reconstruction_0</span><span class="params">()</span></span>;      <span class="comment">//Zero-th order reconstruction</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">reconstruction_TVD</span><span class="params">()</span></span>;    <span class="comment">//Second order TVD reconstruction</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">avg_roe</span><span class="params">()</span></span>;               <span class="comment">//Calculate Roe&#x27;s average at interfaces</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">cal_roe_flux</span><span class="params">()</span></span>;          <span class="comment">//Calculate Roe&#x27;s flux at interfaces</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">writefile</span><span class="params">(<span class="type">const</span> std::string &amp; filename)</span></span>;  <span class="comment">//Store the outcome</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">timeadvancement</span><span class="params">(<span class="type">double</span> dt, <span class="type">int</span> oldset)</span></span>;   <span class="comment">//Explicit time advancement</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>可以看到，<code>Euler1D</code>类的属性有包括：记录边界条件类型的字符串；存储本时间步的解的数组和存储上一时间步的解的数组；存储重构得到的左右状态的数组；存储界面上的均值的数组；存储通量的数组。私有方法包括守恒变量和原始变量相互转换的函数；<span class="math inline">\(minmod\)</span>函数以及存储上一时间步的解的函数。</p>
+<p>公有方法则包括：构造、析构函数；初始化函数；边界条件设置函数；零阶重构函数；TVD重构函数；Roe平均函数；Roe通量函数；用于将结果写成文件的函数；时间推进函数。</p>
+<p>可见，<code>Euler1D</code>类中包含私有属性、私有函数和公有函数（包括自定义的构造函数和析构函数）。下面我们来展示如何使用Cython包装这个类。</p>
+<h3 id="编写定义文件.pxd">编写定义文件.pxd</h3>
+<p>Cython中<code>.pxd</code>文件的地位类似于C++中<code>.h</code>文件的地位。在<code>.pxd</code>文件里我们会给出类和类方法的定义，但不会给出其具体实现。本例中<code>Eulerdef.pxd</code>文件如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#cython:language level = 3</span><br><span class="line">cdef extern from &quot;Euler1D.cpp&quot;:</span><br><span class="line">    pass</span><br><span class="line"></span><br><span class="line">from libcpp.string cimport string</span><br><span class="line"></span><br><span class="line">cdef extern from &quot;Euler1D.h&quot;:</span><br><span class="line">    cdef cppclass Euler1D:</span><br><span class="line">        Euler1D(string bctype, int n) except + </span><br><span class="line">        void initialize() except + </span><br><span class="line">        void set_boundary() except + </span><br><span class="line">        void reconstruction_0() except + </span><br><span class="line">        void reconstruction_TVD() except +</span><br><span class="line">        void avg_roe() except + </span><br><span class="line">        void cal_roe_flux() except +</span><br><span class="line">        void writefile(string filename) except +</span><br><span class="line">        void timeadvancement(double dt, int oldset) except +</span><br></pre></td></tr></table></figure>
+<p>下面来说说其中需要注意的地方。</p>
+<ul>
+<li>使用<code>cppclass</code>关键字定义C++中自定义的类。</li>
+<li>由于我们使用了C++中自带的<code>string</code>，所以需要有<code>from libcpp.x cimport x</code>语句。</li>
+<li>通过<code>cdef extern from</code>在Cython中声明外部C文件已经声明的类、函数等。一般的语法为：</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cdef extern from &quot;header_name&quot;</span><br><span class="line">	...</span><br><span class="line">    #indented declarations from header file</span><br></pre></td></tr></table></figure>
+<p>上述<code>cdef extern from</code>语句块会使得<code>cython</code>编译得到的C文件中出现<code>#include "header_name"</code>。另外，语句块中定义的变量，函数等能为Cython代码的其他部分所用。在<code>.pxd</code>文件中，我们使用了两次<code>cdef extern from</code>语句块，第一次使用只是<code>include</code>了C实现文件<code>Euler1D.cpp</code>，第二次则<code>include</code>了头文件，并声明了<code>Euler1D</code>类中所有<strong>我们希望之后在Python外壳中调用的公有方法</strong>。要特别注意的是：</p>
+<p>1）在这里我们<strong>不一定</strong>要声明类中所有的公有方法，只用声明我们需要的那些公有方法。</p>
+<p>2）除了构造函数外，其他方法<strong>都要指明返回值类型</strong>，这和C++的语法相同。</p>
+<p>3）声明公有方法时，不用像C++中那样加<code>Euler1D::</code>。</p>
+<p>4）要指明函数参数的C类型，但不用使用<code>cdef</code>语句。</p>
+<p>5）函数末尾加上<code>except +</code>语句，可以使得C++触发异常时将异常传递给Cython。</p>
+<p>6）<strong>不能</strong>在<code>cdef extern from</code>语句块中声明私有属性、私有方法。这延续了C++“封装”的思想，保证了私有成员不会被Python外壳访问。</p>
+<h3 id="编写实现文件.pyx">编写实现文件.pyx</h3>
+<p>Cython中<code>.pyx</code>文件的地位类似于C++中<code>.cpp</code>文件的地位。在<code>.pyx</code>文件里我们实现<code>.pxd</code>文件中声明的类方法，正如C++在<code>.cpp</code>文件中实现<code>.h</code>文件声明的类方法一样。本例中<code>pyEuler1D.pyx</code>文件如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">#distutils:language=c++</span><br><span class="line">#cython:language_level=3</span><br><span class="line"></span><br><span class="line">from Eulerdef cimport Euler1D as _Euler</span><br><span class="line">from libcpp.string cimport string</span><br><span class="line"></span><br><span class="line">cdef class Euler1D:</span><br><span class="line"></span><br><span class="line">    cdef _Euler* pEuler</span><br><span class="line"></span><br><span class="line">    def __cinit__(self):</span><br><span class="line">        self.pEuler = NULL</span><br><span class="line"></span><br><span class="line">    def __dealloc__(self):</span><br><span class="line">        print(&quot;__dealloc__is performed!&quot;)</span><br><span class="line">        if self.pEuler != NULL:</span><br><span class="line">            del self.pEuler</span><br><span class="line"></span><br><span class="line">    def __init__(self, string &amp; bc, int N):</span><br><span class="line">        self.pEuler = new _Euler(bc, N)</span><br><span class="line"></span><br><span class="line">    def initialize(self):</span><br><span class="line">        self.pEuler.initialize()</span><br><span class="line">    </span><br><span class="line">    def set_boundary(self):</span><br><span class="line">        self.pEuler.set_boundary()</span><br><span class="line"></span><br><span class="line">    def reconstruction_0(self):</span><br><span class="line">        self.pEuler.reconstruction_0()</span><br><span class="line"></span><br><span class="line">    def reconstruction_TVD(self):</span><br><span class="line">        self.pEuler.reconstruction_TVD()</span><br><span class="line"></span><br><span class="line">    def avg_roe(self):</span><br><span class="line">        self.pEuler.avg_roe()</span><br><span class="line"></span><br><span class="line">    def cal_roe_flux(self):</span><br><span class="line">        self.pEuler.cal_roe_flux()</span><br><span class="line"></span><br><span class="line">    def writefile(self, string &amp; filename):</span><br><span class="line">        self.pEuler.writefile(filename)</span><br><span class="line"></span><br><span class="line">    def timeadvancement(self,double dt, int oldset):</span><br><span class="line">        self.pEuler.timeadvancement(dt, oldset)</span><br></pre></td></tr></table></figure>
+<p>下面来谈谈<code>.pyx</code>文件中需要注意的点：</p>
+<ul>
+<li>类似于C++的<code>.cpp</code>文件中<code># include "x.h"</code>将定义文件<code>x.h</code>包含，实现文件<code>.pyx</code>也要将<code>.pxd</code>定义文件包含进来。这是通过<code>from ... cimport ... as ...</code>实现的。</li>
+<li>在声明中使用了C++字符串类，因此要<code>cimport</code>字符串类。</li>
+<li>类函数实现的代码块和纯Python类实现代码块相似，但要在开头加上<code>cdef</code>。</li>
+<li>要创建一个<code>Euler1D</code>（被<code>import</code>为了<code>_Euler</code>类）类的指针。在之后定义类方法时，我们使用这个指针访问<code>Euler1D</code>的各个方法。</li>
+<li>纯Python类定义只有一个<code>__init__</code>构造函数，而此处的类定义除了<code>__init__</code>构造函数外，还要有一个<code>__cinit__</code>构造函数。<code>__cinit__</code>函数将C++类指针初始化为<code>NULL</code>，它的地位相当于C++中的默认构造 函数，只是在这里它需要被显式定义。在调用Python层级的构造函数<code>__init__</code>之前，<code>__cinit__</code>将被调用。</li>
+<li>要定义<code>__dealloc__</code>函数执行C++层级的内存释放。这相当于C++中的析构函数。（注意，C++类<code>Euler1D</code>中本身定义过析构函数，但是我们并没有在<code>.pxd</code>中声明它，因此在<code>.pyx</code>文件中它是不可见的，所以我们还要<code>.pyx</code>文件中实现一个析构函数。我们之所以不在<code>.pxd</code>中声明C++代码定义好的析构函数，是因为我们不希望我们正在搭建的Python外壳有能力显式地调用析构函数。）注意这里我们使用<code>del</code>解除Python引用。引用解除后，C++层级的析构函数便被调用。</li>
+<li>Python层级的<code>__init__</code>构造函数通过<code>new</code>给指向<code>Euler1D</code>类实例的指针<code>pEuler</code>分配内存，并调用C++代码中的构造函数初始化<code>pEuler</code>指向的实例。</li>
+<li>其他公有方法都靠<strong><code>pEuler</code>指针调用C++中已经实现好的方法</strong>来实现。不要忘记各个方法参数中的<code>self</code>。</li>
+</ul>
+<h3 id="使用setuptools和cython编译并安装扩展">使用setuptools和Cython编译并安装扩展</h3>
+<p>编写<code>setup.py</code>来编译并安装扩展。<code>setup.py</code>代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup</span><br><span class="line"><span class="keyword">from</span> Cython.Build <span class="keyword">import</span> cythonize</span><br><span class="line"></span><br><span class="line">setup(</span><br><span class="line">    name=<span class="string">&#x27;pyEuler1D app&#x27;</span>,</span><br><span class="line">    ext_modules=cythonize(<span class="string">&quot;pyEuler1D.pyx&quot;</span>,language_level=<span class="number">3</span>),</span><br><span class="line">    zip_safe=<span class="literal">False</span>,</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>目前，<strong>笔者还不太清楚<code>setuptools</code>的具体用法，只是知道在这里可以使用它进行编译、安装和打包等操作</strong>。需要了解<code>setuptools</code>，或是想要知道高级的打包、安装选项，可以访问<a target="_blank" rel="noopener" href="http://setuptools.readthedocs.io/">这里</a>。注意此处将实现文件<code>pyEuler1D.pyx</code>作为要<code>cythonize</code>的对象。</p>
+<p>现在，我们编写完了所有代码。将<code>Euler1D.h</code>, <code>Euler1D.cpp</code>, <code>Eulerdef.pxd</code>, <code>pyEuler1D.pyx</code>和<code>setup.py</code>放在一个目录下，并在该目录下打开<code>cmd</code>。笔者使用的Anaconda管理虚拟环境，因此笔者安装时，先激活装有<code>Cython</code>包的、笔者自定义的虚拟环境<code>Extentions</code>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda activate Extentions</span><br></pre></td></tr></table></figure>
+<p>然后输入以下指令安装扩展：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+<p>扩展将被安装到<code>../Anaconda/envs/Extentions/Lib/site-packages</code>目录下，扩展的名称为<code>pyEuler1D</code>。下面来检验<code>pyEuler1D</code>扩展是否安装成功。编写脚本<code>run.py</code>作为<code>pyEuler1D</code>扩展的“交互界面”：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pyEuler1D</span><br><span class="line"><span class="keyword">import</span> math</span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt </span><br><span class="line"><span class="comment"># Solve 1-D Euler equation using the C++ code wrapped by Cython</span></span><br><span class="line"><span class="comment"># This is the user-interface of the solver written by python</span></span><br><span class="line"></span><br><span class="line"><span class="comment">######################## User input ###########################</span></span><br><span class="line"></span><br><span class="line">n = <span class="number">1500</span>                                   <span class="comment"># The number of grid cells along x direction</span></span><br><span class="line">cfl = <span class="number">0.25</span>                                 <span class="comment"># CFL number. The time step is determined by: dt = CFL*dx</span></span><br><span class="line">t = <span class="number">0.1</span>                                    <span class="comment"># Time to terminate the time advancement (The equation is integrated to t)</span></span><br><span class="line">bctype = <span class="built_in">bytes</span>(<span class="string">&quot;Inf&quot;</span>,<span class="string">&quot;ascii&quot;</span>)              <span class="comment"># Boundary condition. Currently only the infinity condition (Inf) and periodic </span></span><br><span class="line">                                           <span class="comment"># condition (Periodic) are supported. Input otherwise would raise error.</span></span><br><span class="line">FILENAME = <span class="string">&quot;Output&quot;</span>                        <span class="comment"># The name of the ouput file</span></span><br><span class="line">file_num = <span class="number">100</span>                             <span class="comment"># The number of output files</span></span><br><span class="line"></span><br><span class="line"><span class="comment">######################## Solver setup #########################</span></span><br><span class="line"></span><br><span class="line">dx = <span class="number">1.0</span>/n</span><br><span class="line">dtt = cfl*dx</span><br><span class="line">step = math.floor(t/dtt)</span><br><span class="line">writestep = math.floor(step/file_num)</span><br><span class="line">pysolver = pyEuler1D.Euler1D(bctype, n)</span><br><span class="line">pysolver.initialize()</span><br><span class="line">pysolver.set_boundary()</span><br><span class="line"></span><br><span class="line"><span class="comment">######################### Solver run ##########################</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,step):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="number">4</span>):</span><br><span class="line">        pysolver.reconstruction_0()</span><br><span class="line">        pysolver.avg_roe()</span><br><span class="line">        pysolver.reconstruction_TVD()</span><br><span class="line">        pysolver.avg_roe()</span><br><span class="line">        pysolver.cal_roe_flux()</span><br><span class="line">        dt = dtt/(<span class="number">4</span>-j)</span><br><span class="line">        pysolver.timeadvancement(dt,<span class="number">1</span>-j)</span><br><span class="line">        pysolver.set_boundary()</span><br><span class="line"></span><br><span class="line">fnam = <span class="built_in">bytes</span>(FILENAME+<span class="string">&quot;.dat&quot;</span>,<span class="string">&quot;ascii&quot;</span>)           </span><br><span class="line">pysolver.writefile(fnam)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">##################### Post processing ########################</span></span><br><span class="line"><span class="comment">#read the outcome</span></span><br><span class="line">...<span class="comment">#Omitted here</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">#plot the outcome</span></span><br><span class="line">...<span class="comment">#Omitted here</span></span><br></pre></td></tr></table></figure>
+<p>上述交互界面调用了<code>matplotlib</code>包来对计算结果进行后处理。为了简洁，后处理代码被隐去。交互界面中时间推进的部分采用Runge-Kutta四步时间推进。用户可以根据自己的需求修改时间推进方式。目前，初始条件在<code>Euler1D.cpp</code>中用C++代码直接给定，还不能接受用户的输入。因此要修改初始条件只能修改<code>Euler1D.cpp</code>文件，然后重新安装<code>pyEuler1D</code>扩展。程序内置的初始条件包含两道间断，其他位置<span class="math inline">\(\rho,u,p\)</span>均匀。</p>
+<p>在<code>run.py</code>所在的目录下打开<code>cmd</code>，然后激活<code>Extentions</code>虚拟环境，再运行<code>run.py</code>，命令行中会出现下面的提示信息：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">__cinit__ is performed!</span><br><span class="line">Constructing...</span><br><span class="line">Initializing...</span><br><span class="line">Initilaztion completed...</span><br><span class="line">Opening the file...</span><br><span class="line">__dealloc__ is performed!</span><br><span class="line">Clean up Euler1D object!</span><br></pre></td></tr></table></figure>
+<p>然后可以在目录下找到经过后处理的计算结果，它是一张<code>.png</code>图片。可从图片中看到，初始的两个间断分别发展成了RCR（稀疏波-接触间断-稀疏波）和RCS（稀疏波-接触间断-激波）形式。</p>
+
+      </div>
+      
+      
+      
+    </div>
+  <ul class="breadcrumb">
+            <li><a href="/Docs/">DOCS</a></li>
+            <li><a href="/Docs/Coding/">CODING</a></li>
+            <li>CYTHON</li>
+          
+  </ul>
+
+    
+    
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Aerolabers</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
