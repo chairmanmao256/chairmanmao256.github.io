@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>tags</title>
-    <url>/tags/index.html</url>
-    <content><![CDATA[
-]]></content>
-  </entry>
-  <entry>
     <title>文档</title>
     <url>/Docs/index.html</url>
     <content><![CDATA[<p>Aerolab成员撰写帮助文档都被放在这个页面下。希望这些文档能够帮助你搞明白你想了解的问题。使用快捷键<code>Ctrl+F</code>在页面中搜索你想了解的内容的关键字。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>tags</title>
+    <url>/tags/index.html</url>
+    <content><![CDATA[
 ]]></content>
   </entry>
   <entry>
@@ -61,12 +61,6 @@
 <p>本课程意在帮你解决这一问题。</p>
 
 </blockquote> 这门课程介绍了<code>shell</code>、<code>git</code>和<code>vim</code>等等我们在科研过程中常用的工具的使用方法。另外还简要介绍了<code>markdown</code>——一种写文档的高效语言，你正在读的这个网页就是用<code>markdown</code>写的。一些常用的计算机术语（例如“API”）也会被介绍。每节课的长度在1小时左右，因此你可以每天听一节，十几天后你就都会了。</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>码！</title>
-    <url>/Docs/Coding/index.html</url>
-    <content><![CDATA[<p>我们并不研究计算机科学，我们也很少自己写大型求解器；但是掌握一定程度的计算机知识对我们的科研非常重要，因为我们很多时候要在一些现成的求解器上做二次开发、用简单的小程序验证idea。本页面将会介绍我们在科研过程中常用的计算机语言（<code>Fotran</code>,<code>C++</code>,<code>python</code>等）、环境配置（如何安装<code>WSL</code>等）。当然，我们不可能在本页面展示非常详细的教程（例如<code>C++</code>的各种语法），我们只会附上相关教程的链接。学习这些技术不应该成为科研的主要部分，而应该是你遇到相关任务时的有效参考。</p>
 ]]></content>
   </entry>
   <entry>
@@ -156,6 +150,19 @@
 ]]></content>
   </entry>
   <entry>
+    <title>码！</title>
+    <url>/Docs/Coding/index.html</url>
+    <content><![CDATA[<p>我们并不研究计算机科学，我们也很少自己写大型求解器；但是掌握一定程度的计算机知识对我们的科研非常重要，因为我们很多时候要在一些现成的求解器上做二次开发、用简单的小程序验证idea。本页面将会介绍我们在科研过程中常用的计算机语言（<code>Fotran</code>,<code>C++</code>,<code>python</code>等）、环境配置（如何安装<code>WSL</code>等）。当然，我们不可能在本页面展示非常详细的教程（例如<code>C++</code>的各种语法），我们只会附上相关教程的链接。学习这些技术不应该成为科研的主要部分，而应该是你遇到相关任务时的有效参考。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>使用ICEM画网格</title>
+    <url>/Docs/Software/ICEM.html</url>
+    <content><![CDATA[<h2 id="视频教学">视频教学</h2>
+<p>将由Aerolab网格专家录制，敬请期待！</p>
+]]></content>
+  </entry>
+  <entry>
     <title>安装与使用ALDESIA</title>
     <url>/Docs/Software/ALDESIA.html</url>
     <content><![CDATA[<h2 id="概述">概述</h2>
@@ -207,13 +214,6 @@
     <title>软件使用</title>
     <url>/Docs/Software/index.html</url>
     <content><![CDATA[<p>学会使用软件是在Aerolab做科研的重要一步。当然，它也是十分困难的一步。本页面包含Aerolab各个软件的专家级用户编辑的软件使用指南，覆盖的软件包含ICEM，CFD++，CFL3D等。希望专家级用户们的教学能增进你对这些软件的熟练程度！</p>
-]]></content>
-  </entry>
-  <entry>
-    <title>使用ICEM画网格</title>
-    <url>/Docs/Software/ICEM.html</url>
-    <content><![CDATA[<h2 id="视频教学">视频教学</h2>
-<p>将由Aerolab网格专家录制，敬请期待！</p>
 ]]></content>
   </entry>
 </search>
