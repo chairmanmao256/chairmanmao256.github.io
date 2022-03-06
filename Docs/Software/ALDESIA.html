@@ -27,8 +27,8 @@
 <meta property="og:site_name" content="Aerolab Archive">
 <meta property="og:description" content="概述 ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用C++编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了Cython文件和setup.py文件，因而ALDESIA可以被容易地被python打包，变成一个可以被import到python代码中的库。 下载与安装(Windows">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-02-23T08:37:40.153Z">
-<meta property="article:modified_time" content="2022-02-23T08:37:40.153Z">
+<meta property="article:published_time" content="2022-03-06T02:27:45.284Z">
+<meta property="article:modified_time" content="2022-03-06T02:27:45.284Z">
 <meta property="article:author" content="Aerolabers">
 <meta name="twitter:card" content="summary">
 
@@ -287,7 +287,7 @@
       
       <div class="post-body">
           <h2 id="概述">概述</h2>
-<p>ALDESIA是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用<code>C++</code>编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了<code>Cython</code>文件和<code>setup.py</code>文件，因而ALDESIA可以被容易地被<code>python</code>打包，变成一个可以被<code>import</code>到<code>python</code>代码中的库。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/chairmanmao256/ALDESIA">ALDESIA</a>是实验室自编的一款带伴随的二维线性对流扩散方程求解器。ALDESIA是使用<code>C++</code>编写的，它具有很强的面向对象特性，易于扩展，因而适合CFD和伴随算法的初学者阅读代码、修改代码。作者已经为ALDESIA添加了<code>Cython</code>文件和<code>setup.py</code>文件，因而ALDESIA可以被容易地被<code>python</code>打包，变成一个可以被<code>import</code>到<code>python</code>代码中的库。</p>
 <h2 id="下载与安装windowswsl">下载与安装(Windows+WSL)</h2>
 <div class="note warning"><ul>
 <li><p>在下载和安装之前，确保你在WSL上的Ubuntu里安装了<code>g++</code>编译工具。输入下面的命令检查<code>g++</code>工具是否正确安装：</p>
@@ -307,19 +307,17 @@
 </div>
 <div class="tabs" id="installation"><ul class="nav-tabs"><li class="tab active"><a href="#installation-1">Step 1</a></li><li class="tab"><a href="#installation-2">Step 2</a></li></ul><div class="tab-content"><div class="tab-pane active" id="installation-1"><p>打开WSL上的Ubuntu终端，跳转到你希望保存ALDESIA代码的目录（作为演示，我将把ALDESIA代码保存到<code>~/coding</code>目录下）。然后输入下面的指令</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/chairmanmao256/ALDESIA/archive/r1.zip &amp;&amp; \</span><br><span class="line">unzip r1.zip &amp;&amp; \</span><br><span class="line">cd ALDESIA-r1</span><br></pre></td></tr></table></figure>
-<p>现在，你下载并解压了ALDESIA的所有代码，并已经跳转到了这些代码所在的目录。</p></div><div class="tab-pane" id="installation-2"><p>在ALDESIA代码所在的目录中，运行下面的命令以编译所有文件，生成供链接用的<code>.o</code>文件：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Allmake.sh</span><br></pre></td></tr></table></figure>
-<p>然后跳转到<code>Aldesia</code>目录，将ALDESIA打包为<code>python</code>扩展：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd Aldesia &amp;&amp; \</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure></div></div></div>
+<p>现在，你下载并解压了ALDESIA的所有代码，并已经跳转到了这些代码所在的目录。</p></div><div class="tab-pane" id="installation-2"><p>在ALDESIA代码所在的目录中，运行下面的命令以编译所有<code>.cpp</code>文件，并将ALDESIA用<code>cython</code>打包为<code>python</code>扩展：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./Allmake.sh</span><br></pre></td></tr></table></figure></div></div></div>
 <h2 id="使用方法">使用方法</h2>
 <p>运行ALDESIA需要你准备两个文件：</p>
 <div class="tabs" id="run"><ul class="nav-tabs"><li class="tab active"><a href="#run-1">input.ini</a></li><li class="tab"><a href="#run-2">run.py</a></li></ul><div class="tab-content"><div class="tab-pane active" id="run-1"><p>这个文件用来初始化ALDESIA对象，告诉ALDESIA想要它求解的问题的定义。</p></div><div class="tab-pane" id="run-2"><p>是你和ALDESIA的“交互界面”，用于生成ALDESIA对象，调用ALDESIA的方法以解决问题。</p></div></div></div>
-<p>这两个文件的示例可以在示例目录<code>/ALDESIA-r1/Examples</code>下找到。示例目录下有两个示例，分别演示了ALDESIA求解线性对流扩散问题、线性对流扩散的伴随的功能。</p>
+<p>这两个文件的示例可以在示例目录<code>/ALDESIA-r1/Examples</code>下找到。示例目录下有三个示例，分别演示了ALDESIA求解线性对流扩散问题、线性对流扩散的伴随以及平均温度最大化问题的功能。如果你想了解这些示例的更多信息，可以访问<a target="_blank" rel="noopener" href="https://github.com/chairmanmao256/ALDESIA">ALDESIA的Github主页</a>。</p>
 <h2 id="你可以做的开发">你可以做的开发</h2>
-<p>目前，ALDESIA还不算完善：它只能求解正问题及其伴随，得到偏微分方程的解、目标函数的梯度；而且，ALDESIA使用十分原始的SOR方法求解线性方程组。因此，你还可以做：</p>
+<p>目前，ALDESIA使用十分原始的SOR方法求解线性方程组，而且稀疏矩阵的存储方式也不规范。因此，你还可以做：</p>
 <ul>
-<li>完成ALDESIA和优化求解器工具包<a target="_blank" rel="noopener" href="https://github.com/mdolab/pyoptsparse">mdolab/pyoptsparse</a>的接口，使得我们可以利用ALDESIA提供的目标函数值、梯度来求解优化问题。</li>
 <li>使用GMRES方法求解ALDESIA中的线性方程组。</li>
+<li>优化ALDESIA中稀疏矩阵的存储方式。</li>
 </ul>
 
       </div>
